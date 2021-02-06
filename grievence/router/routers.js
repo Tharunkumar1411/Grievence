@@ -3,9 +3,7 @@ var router = express.Router();
 var routeFunction = require('../controller/routeFunction');
 
 router.post("/jwt",routeFunction.jwt);
-router.get("/test",function(req,res){
-    res.send("hello")
-})
+router.get("/test",routeFunction.test);
 
 
 router.post("/addComplaint",routeFunction.addComplaint);

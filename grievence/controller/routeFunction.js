@@ -27,7 +27,9 @@ exports.jwt = (cors(),async (req,res) => {
     }
 })
 
-
+exports.test = (req,res) => {
+  res.send("hello")
+}
 //add complaints into separate collection documents
 exports.addComplaint = (req,res) => {
     console.log(req.body)

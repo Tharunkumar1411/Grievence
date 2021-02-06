@@ -9,8 +9,9 @@ var router = require('./router/routers');
 var authRoute = require('./router/authRouter')
 
 app.use(function(req,res,next){
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Headers","*");
+    res.header('Access-Control-Allow-Origin: *');
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
     next()
 })
 
@@ -20,4 +21,4 @@ app.use(bodyParser.urlencoded ({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/",router)
-app.use("/auth",authRoute)
+// app.use("/auth",authRoute)

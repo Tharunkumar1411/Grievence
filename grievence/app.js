@@ -1,19 +1,16 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-
+const cors = require("cors")
+app.use(cors({credentials:true,origin:'*'}))
 
 var config = require('./ser/DB/DBconfig')
-var app = require('./ser/DB/server')
+var server = require('./ser/DB/server')
 var router = require('./router/routers');
 var authRoute = require('./router/authRouter')
 
-app.use(function(req,res,next){
-    res.header('Access-Control-Allow-Origin: *');
-    res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-    next()
-})
+
+
 
 
 app.use(bodyParser.json())
@@ -22,3 +19,4 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/",router)
 // app.use("/auth",authRoute)
+module.exports = app

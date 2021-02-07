@@ -1,14 +1,14 @@
-var cors = require("cors")
 var {User,Hostel,Academic,Sport} = require('../ser/DB/Schema')
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose');
 const { json } = require("body-parser");
 
 
+
 //generate jwt token
-exports.jwt = (cors(),async (req,res) => {
-    console.log(req.body.email)
-    const foundUser = await User.findOne({"password":req.body.password});
+exports.jwt =  (req,res) => {
+    console.log("hi")
+    const foundUser =  User.findOne({"password":req.body.password});
     if(foundUser){
         const token = jwt.sign({_id:foundUser._id},process.env.TOKEN_SECRET);
         res.header('authorization').send(token)
@@ -25,7 +25,7 @@ exports.jwt = (cors(),async (req,res) => {
             res.status(404).send("unable connect database");
         });
     }
-})
+}
 
 exports.test = (req,res) => {
   res.send("hello")
@@ -43,7 +43,7 @@ exports.addComplaint = (req,res) => {
 
       Hostel.findOneAndUpdate(conditions, update, options, callback);
       Hostel.findOneAndUpdate(conditions, update2, options, callback);
-      
+      res.send(res.body)
       function callback (err, numAffected) {
     //   console.log(numAffected)
       }

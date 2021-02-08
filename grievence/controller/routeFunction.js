@@ -86,6 +86,8 @@ exports.fetchAcademicComplaints = (req,res) => {
     console.log(todos)
   });
 }
+
+
 // exports.fetchSportsComplaints = (req,res) => {
 //   const foundUser =Academic.findOne({}, (err,todos) => {
 //     if(err) return res.send("err")

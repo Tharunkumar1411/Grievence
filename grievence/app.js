@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var app = express();
 const cors = require("cors")
 
-app.use(cors({credentials:true,origin:'*'}))
 
 const passportSetup = require('./module/passport-setup')
 var config = require('./ser/DB/DBconfig')
@@ -22,11 +21,16 @@ app.listen(PORT,()=>{
 })
 
 
+host.Plugins.Add(new CorsFeature(
+    allowedOrigins, "*",
+    allowedMethods, "GET, POST, PUT, DELETE, OPTIONS",
+    allowedHeaders, "*",
+    allowCredentials, false));
 
-
+app.use(cors({credentials:true,origin:'*'}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded ({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/",router)
-app.use("/auth",authRoute)
+// app.use("/auth",authRoute)

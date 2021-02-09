@@ -21,11 +21,7 @@ app.listen(PORT,()=>{
 })
 
 
-host.Plugins.Add(new CorsFeature(
-    allowedOrigins, "*",
-    allowedMethods, "GET, POST, PUT, DELETE, OPTIONS",
-    allowedHeaders, "*",
-    allowCredentials, false));
+
 
 app.use(cors({credentials:true,origin:'*'}))
 app.use(bodyParser.json())

@@ -7,7 +7,7 @@ const { json } = require("body-parser");
 
 //generate jwt token
 exports.jwt =  (req,res) => {
-    console.log("hi")
+    // console.log("hi")
     const foundUser =  User.findOne({"password":req.body.password});
     if(foundUser){
         const token = jwt.sign({_id:foundUser._id},process.env.TOKEN_SECRET);

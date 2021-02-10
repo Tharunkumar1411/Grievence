@@ -21,5 +21,8 @@ router.post("/addComplaint",routeFunction.addComplaint);
 router.get("/getHostelComplaints",routeFunction.getHostelComplaints)
 router.get("/getSportsComplaints",routeFunction.getSportsComplaints)
 router.get("/getAcademicComplaints",routeFunction.getAcademicComplaints)
+router.get("/getRaggingComplaints",routeFunction.getRaggingComplaints)
+router.get("/getTransportComplaints",routeFunction.getTransportComplaints)
+router.get("/getOtherComplaints",routeFunction.getOtherComplaints)
 
 module.exports = router

@@ -1,4 +1,4 @@
-var {User,Hostel,Academic,Sport} = require('../ser/DB/Schema')
+var {User,Hostel,Academic,Sport,Ragging,Transport,Other} = require('../ser/DB/Schema')
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose');
 const { json } = require("body-parser");
@@ -98,9 +98,78 @@ exports.addComplaint =(async (req,res) => {
           createAcademicData.save()
           .then(res.send("successfully Academic data created"))
         }
-
       
       }
+
+      else if(req.body.radio == "Ragging"){
+        const foundUser = await Ragging.findOne({"email":req.body.email});
+        if(foundUser){
+                var Raggingcondition = { email:req.body.email }
+                , RaggingUpdate = { $push: { comp:req.body.comp}}
+                , Raggingoption = { multi: true };
+        
+                var RaggingUpdate1 = { $push: { suggetion:req.body.suggetion}}
+              Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption, callback);
+              Ragging.findOneAndUpdate(Raggingcondition,RaggingUpdate1, Raggingoption, callback);
+              
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Academic data added")
+              }
+        }else{
+          var createRaggingData = new Ragging(req.body)
+          createRaggingData.save()
+          .then(res.send("successfully Ragging data created"))
+        }
+      
+      }
+
+      else if(req.body.radio == "Transport"){
+        const foundUser = await Transport.findOne({"email":req.body.email});
+        if(foundUser){
+                var Transportcondition = { email:req.body.email }
+                , TransportUpdate = { $push: { comp:req.body.comp}}
+                , Transportoption = { multi: true };
+        
+                var TransportUpdate1 = { $push: { suggetion:req.body.suggetion}}
+              Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption, callback);
+              Transport.findOneAndUpdate(Transportcondition,TransportUpdate1, Transportoption, callback);
+              
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Transport data added")
+              }
+        }else{
+          var createTransportData = new Transport(req.body)
+          createTransportData.save()
+          .then(res.send("successfully Transport data created"))
+        }
+      
+      }
+      
+      else if(req.body.radio == "Others"){
+        const foundUser = await Other.findOne({"email":req.body.email});
+        if(foundUser){
+                var Othercondition = { email:req.body.email }
+                , OtherUpdate = { $push: { comp:req.body.comp}}
+                , Otheroption = { multi: true };
+        
+                var OtherUpdate1 = { $push: { suggetion:req.body.suggetion}}
+              Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption, callback);
+              Other.findOneAndUpdate(Othercondition,OtherUpdate1, Otheroption, callback);
+              
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Other data added")
+              }
+        }else{
+          var createOtherData = new Other(req.body)
+          createOtherData.save()
+          .then(res.send("successfully Other data created"))
+        }
+      
+      }
+
       else{
         res.status(404).send("unable connect database");
       }
@@ -108,15 +177,40 @@ exports.addComplaint =(async (req,res) => {
 
 
 exports.getHostelComplaints = (req,res) => {
-  res.send("hi")
+  
+  Hostel.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
 }
 
 exports.getSportsComplaints = (req,res) => {
-  res.send("hii")
+  Sport.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
 }
 
 exports.getAcademicComplaints = (req,res) => {
-  res.send("hiii")
+  Academic.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
+}
+
+exports.getRaggingComplaints = (req,res) => {
+  Ragging.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
+}
+
+exports.getTransportComplaints = (req,res) => {
+  Transport.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
+}
+
+exports.getOtherComplaints = (req,res) => {
+  Other.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
+    res.send(count)
+  })
 }
 
 

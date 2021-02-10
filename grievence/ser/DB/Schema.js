@@ -62,6 +62,58 @@ var sportsSchema = new mongoose.Schema({
     }
 
 });
+
 var Sport = mongoose.model("Sport",sportsSchema);
 
-module.exports  = {User,Hostel,Academic,Sport};
+var otherSchema = new mongoose.Schema({
+    radio:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    comp:{
+        type:Array
+    },
+    suggetion:{
+        type:Array
+    }
+
+});
+var Other = mongoose.model("Other",otherSchema);
+
+var raggingSchema = new mongoose.Schema({
+    radio:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    comp:{
+        type:Array
+    },
+    suggetion:{
+        type:Array
+    }
+
+});
+var Ragging = mongoose.model("Ragging",raggingSchema);
+
+var transportSchema = new mongoose.Schema({
+    radio:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    comp:{
+        type:Array
+    },
+    suggetion:{
+        type:Array
+    }
+
+});
+var Transport = mongoose.model("Transport",transportSchema);
+
+module.exports  = {User,Hostel,Academic,Sport,Transport,Other,Ragging};

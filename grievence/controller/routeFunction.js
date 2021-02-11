@@ -43,13 +43,13 @@ exports.addComplaint =(async (req,res) => {
               , options = { multi: true };
               var update2 = { $push: { suggetion:req.body.suggetion}}
 
-            Hostel.findOneAndUpdate(conditions, update, options, callback);
-            Hostel.findOneAndUpdate(conditions, update2, options, callback);
-            
-            function callback (err, numAffected) {
-          //   console.log(numAffected)
-          res.send("successfully hostel data added")
-            }
+            Hostel.findOneAndUpdate(conditions, update, options);
+            Hostel.findOneAndUpdate(conditions, update2, options);
+            res.send("successfully hostel data added")
+          //   functio (err, numAffected) {
+          // //   console.log(numAffected)
+          // res.send("successfully hostel data added")
+          //   }
       }else{
         var createHostelData = new Hostel(req.body)
         createHostelData.save()
@@ -64,13 +64,13 @@ exports.addComplaint =(async (req,res) => {
                   , updatee = { $push: { comp:req.body.comp}}
                   , optionss = { multi: true };
                   var updatee2 = { $push: { suggetion:req.body.suggetion}}
-                Sport.findOneAndUpdate(conditionss, updatee, optionss, callback);
-                Sport.findOneAndUpdate(conditionss, updatee2, optionss, callback);
-                
-                function callback (err, numAffected) {
-              //   console.log(numAffected)
-              res.send("successfully Sport data added")
-                }
+                Sport.findOneAndUpdate(conditionss, updatee, optionss);
+                Sport.findOneAndUpdate(conditionss, updatee2, optionss);
+                res.send("successfully Sport data added")
+              //   functio (err, numAffected) {
+              // //   console.log(numAffected)
+              // res.send("successfully Sport data added")
+              //   }
         }else{
           var createSportData = new Sport(req.body)
           createSportData.save()
@@ -86,13 +86,13 @@ exports.addComplaint =(async (req,res) => {
                 , option = { multi: true };
         
                 var updat2 = { $push: { suggetion:req.body.suggetion}}
-              Academic.findOneAndUpdate(condition, updat, option, callback);
-              Academic.findOneAndUpdate(condition, updat2, option, callback);
-              
-              function callback (err, numAffected) {
-            //   console.log(numAffected)
-            res.send("successfully Academic data added")
-              }
+              Academic.findOneAndUpdate(condition, updat, option);
+              Academic.findOneAndUpdate(condition, updat2, option);
+              res.send("successfully Academic data added")
+            //   functio (err, numAffected) {
+            // //   console.log(numAffected)
+            // res.send("successfully Academic data added")
+            //   }
         }else{
           var createAcademicData = new Academic(req.body)
           createAcademicData.save()
@@ -109,13 +109,13 @@ exports.addComplaint =(async (req,res) => {
                 , Raggingoption = { multi: true };
         
                 var RaggingUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption, callback);
-              Ragging.findOneAndUpdate(Raggingcondition,RaggingUpdate1, Raggingoption, callback);
-              
-              function callback (err, numAffected) {
-            //   console.log(numAffected)
-            res.send("successfully Academic data added")
-              }
+              Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption);
+              Ragging.findOneAndUpdate(Raggingcondition,RaggingUpdate1, Raggingoption);
+              res.send("successfully Academic data added")
+            //   functio (err, numAffected) {
+            // //   console.log(numAffected)
+            // res.send("successfully Academic data added")
+            //   }
         }else{
           var createRaggingData = new Ragging(req.body)
           createRaggingData.save()
@@ -132,13 +132,13 @@ exports.addComplaint =(async (req,res) => {
                 , Transportoption = { multi: true };
         
                 var TransportUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption, callback);
-              Transport.findOneAndUpdate(Transportcondition,TransportUpdate1, Transportoption, callback);
-              
-              function callback (err, numAffected) {
-            //   console.log(numAffected)
-            res.send("successfully Transport data added")
-              }
+              Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption);
+              Transport.findOneAndUpdate(Transportcondition,TransportUpdate1, Transportoption);
+              res.send("successfully Transport data added")
+            //   functio (err, numAffected) {
+            // //   console.log(numAffected)
+            // res.send("successfully Transport data added")
+            //   }
         }else{
           var createTransportData = new Transport(req.body)
           createTransportData.save()
@@ -155,13 +155,13 @@ exports.addComplaint =(async (req,res) => {
                 , Otheroption = { multi: true };
         
                 var OtherUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption, callback);
-              Other.findOneAndUpdate(Othercondition,OtherUpdate1, Otheroption, callback);
-              
-              function callback (err, numAffected) {
-            //   console.log(numAffected)
-            res.send("successfully Other data added")
-              }
+              Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption);
+              Other.findOneAndUpdate(Othercondition,OtherUpdate1, Otheroption);
+              res.send("successfully Other data added")
+            //   functio (err, numAffected) {
+            // //   console.log(numAffected)
+            // res.send("successfully Other data added")
+            //   }
         }else{
           var createOtherData = new Other(req.body)
           createOtherData.save()

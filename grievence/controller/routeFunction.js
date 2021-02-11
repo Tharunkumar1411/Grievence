@@ -30,26 +30,25 @@ exports.jwt =  ( async (req,res) => {
 
 
 //add complaints into separate collection documents
-exports.addComplaint =(async (req,res) => {
+exports.addComplaint = (req,res) => {
   
     console.log(req.body)
     mongoose.set('useFindAndModify', false);
 
     if(req.body.radio === "Hostel"){
-      const foundUser = await Hostel.findOne({"email":req.body.email});
+      const foundUser =  Hostel.findOne({"email":req.body.email});
       if(foundUser){
               var conditions = { email:req.body.email }
-              , update = { $push: { comp:[req.body.comp]}}
+              , update ={ $push: { comp:req.body.comp,suggetion:req.body.suggetion}}
               , options = { multi: true };
-              var update2 = { $push: { suggetion:req.body.suggetion}}
+        
 
-            Hostel.findOneAndUpdate(conditions, update, options);
-            Hostel.findOneAndUpdate(conditions, update2, options);
-            res.send("successfully hostel data added")
-          //   functio (err, numAffected) {
-          // //   console.log(numAffected)
-          // res.send("successfully hostel data added")
-          //   }
+            Hostel.findOneAndUpdate(conditions, update, options,callback);
+          
+            function callback (err, numAffected) {
+          //   console.log(numAffected)
+          res.send("successfully hostel data added")
+            }
       }else{
         var createHostelData = new Hostel(req.body)
         createHostelData.save()
@@ -58,19 +57,19 @@ exports.addComplaint =(async (req,res) => {
         
     }
       else if(req.body.radio == "Sports"){
-        const foundUser = await Sport.findOne({"email":req.body.email});
+        const foundUser =  Sport.findOne({"email":req.body.email});
         if(foundUser){
                   var conditionss = { email:req.body.email }
-                  , updatee = { $push: { comp:req.body.comp}}
+                  , updatee = { $push: { comp:req.body.comp,suggetion:req.body.suggetion}}
                   , optionss = { multi: true };
-                  var updatee2 = { $push: { suggetion:req.body.suggetion}}
-                Sport.findOneAndUpdate(conditionss, updatee, optionss);
-                Sport.findOneAndUpdate(conditionss, updatee2, optionss);
-                res.send("successfully Sport data added")
-              //   functio (err, numAffected) {
-              // //   console.log(numAffected)
-              // res.send("successfully Sport data added")
-              //   }
+        
+                Sport.findOneAndUpdate(conditionss, updatee, optionss,callback);
+          
+    
+                function callback (err, numAffected) {
+              //   console.log(numAffected)
+              res.send("successfully Sport data added")
+                }
         }else{
           var createSportData = new Sport(req.body)
           createSportData.save()
@@ -79,20 +78,19 @@ exports.addComplaint =(async (req,res) => {
        
       }
       else if(req.body.radio == "Academics"){
-        const foundUser = await Academic.findOne({"email":req.body.email});
+        const foundUser =  Academic.findOne({"email":req.body.email});
         if(foundUser){
                 var condition = { email:req.body.email }
-                , updat = { $push: { comp:req.body.comp}}
+                , updat = { $push: { comp:req.body.comp,suggetion:req.body.suggetion}}
                 , option = { multi: true };
         
-                var updat2 = { $push: { suggetion:req.body.suggetion}}
-              Academic.findOneAndUpdate(condition, updat, option);
-              Academic.findOneAndUpdate(condition, updat2, option);
-              res.send("successfully Academic data added")
-            //   functio (err, numAffected) {
-            // //   console.log(numAffected)
-            // res.send("successfully Academic data added")
-            //   }
+      
+              Academic.findOneAndUpdate(condition, updat, option,callback);
+      
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Academic data added")
+              }
         }else{
           var createAcademicData = new Academic(req.body)
           createAcademicData.save()
@@ -102,20 +100,19 @@ exports.addComplaint =(async (req,res) => {
       }
 
       else if(req.body.radio == "Ragging"){
-        const foundUser = await Ragging.findOne({"email":req.body.email});
+        const foundUser =  Ragging.findOne({"email":req.body.email});
         if(foundUser){
                 var Raggingcondition = { email:req.body.email }
-                , RaggingUpdate = { $push: { comp:req.body.comp}}
+                , RaggingUpdate = { $push: { comp:req.body.comp, suggetion:req.body.suggetion}}
                 , Raggingoption = { multi: true };
         
-                var RaggingUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption);
-              Ragging.findOneAndUpdate(Raggingcondition,RaggingUpdate1, Raggingoption);
-              res.send("successfully Academic data added")
-            //   functio (err, numAffected) {
-            // //   console.log(numAffected)
-            // res.send("successfully Academic data added")
-            //   }
+        
+              Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption,callback);
+        
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Academic data added")
+              }
         }else{
           var createRaggingData = new Ragging(req.body)
           createRaggingData.save()
@@ -125,20 +122,19 @@ exports.addComplaint =(async (req,res) => {
       }
 
       else if(req.body.radio == "Transport"){
-        const foundUser = await Transport.findOne({"email":req.body.email});
+        const foundUser =  Transport.findOne({"email":req.body.email});
         if(foundUser){
                 var Transportcondition = { email:req.body.email }
-                , TransportUpdate = { $push: { comp:req.body.comp}}
+                , TransportUpdate = { $push: { comp:req.body.comp,suggetion:req.body.suggetion}}
                 , Transportoption = { multi: true };
         
-                var TransportUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption);
-              Transport.findOneAndUpdate(Transportcondition,TransportUpdate1, Transportoption);
-              res.send("successfully Transport data added")
-            //   functio (err, numAffected) {
-            // //   console.log(numAffected)
-            // res.send("successfully Transport data added")
-            //   }
+      
+              Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption,callback);
+      
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Transport data added")
+              }
         }else{
           var createTransportData = new Transport(req.body)
           createTransportData.save()
@@ -148,20 +144,19 @@ exports.addComplaint =(async (req,res) => {
       }
       
       else if(req.body.radio == "Others"){
-        const foundUser = await Other.findOne({"email":req.body.email});
+        const foundUser =  Other.findOne({"email":req.body.email});
         if(foundUser){
                 var Othercondition = { email:req.body.email }
-                , OtherUpdate = { $push: { comp:req.body.comp}}
+                , OtherUpdate = { $push: { comp:req.body.comp,suggetion:req.body.suggetion}}
                 , Otheroption = { multi: true };
         
-                var OtherUpdate1 = { $push: { suggetion:req.body.suggetion}}
-              Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption);
-              Other.findOneAndUpdate(Othercondition,OtherUpdate1, Otheroption);
-              res.send("successfully Other data added")
-            //   functio (err, numAffected) {
-            // //   console.log(numAffected)
-            // res.send("successfully Other data added")
-            //   }
+            
+              Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption,callback);
+          
+              function callback (err, numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Other data added")
+              }
         }else{
           var createOtherData = new Other(req.body)
           createOtherData.save()
@@ -173,7 +168,7 @@ exports.addComplaint =(async (req,res) => {
       else{
         res.status(404).send("unable connect database");
       }
-  })
+  }
 
 
 exports.getHostelComplaints = (req,res) => {
@@ -207,7 +202,7 @@ exports.getTransportComplaints = (req,res) => {
   })
 }
 
-exports.getOtherComplaints = (req,res) => {
+exports.getUnknownComplaints = (req,res) => {
   Other.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
     res.send(count)
   })

@@ -65,22 +65,7 @@ var sportsSchema = new mongoose.Schema({
 
 var Sport = mongoose.model("Sport",sportsSchema);
 
-var otherSchema = new mongoose.Schema({
-    radio:{
-        type:String
-    },
-    email:{
-        type:String
-    },
-    comp:{
-        type:Array
-    },
-    suggetion:{
-        type:Array
-    }
 
-});
-var Other = mongoose.model("Other",otherSchema);
 
 var raggingSchema = new mongoose.Schema({
     radio:{
@@ -115,5 +100,23 @@ var transportSchema = new mongoose.Schema({
 
 });
 var Transport = mongoose.model("Transport",transportSchema);
+
+
+var otherSchema = new mongoose.Schema({
+    radio:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    comp:{
+        type:Array
+    },
+    suggetion:{
+        type:Array
+    }
+
+});
+var Other = mongoose.model("Other",otherSchema);
 
 module.exports  = {User,Hostel,Academic,Sport,Transport,Other,Ragging};

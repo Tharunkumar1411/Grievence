@@ -23,6 +23,6 @@ router.get("/getSportsComplaints",routeFunction.getSportsComplaints)
 router.get("/getAcademicComplaints",routeFunction.getAcademicComplaints)
 router.get("/getRaggingComplaints",routeFunction.getRaggingComplaints)
 router.get("/getTransportComplaints",routeFunction.getTransportComplaints)
-router.get("/getOtherComplaints",routeFunction.getOtherComplaints)
+router.get("/getUnknownComplaints",routeFunction.getUnknownComplaints)
 
 module.exports = router

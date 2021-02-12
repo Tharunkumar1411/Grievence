@@ -188,10 +188,11 @@ exports.addComplaint = (req,res) => {
 
 
 exports.getHostelComplaints = (req,res) => {
-  
+
   Hostel.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
     res.send(count)
   })
+  
 }
 
 exports.getSportsComplaints = (req,res) => {

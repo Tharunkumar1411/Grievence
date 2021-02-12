@@ -12,6 +12,7 @@ exports.jwt =  ( async (req,res) => {
     if(foundUser){
         // const token = jwt.sign({_id:foundUser._id},process.env.TOKEN_SECRET);
         // res.header('authorization').send(token)
+       
         res.send("user already exist")
        
     }else{
@@ -33,7 +34,7 @@ exports.jwt =  ( async (req,res) => {
 
 //add complaints into separate collection documents
 exports.addComplaint = (req,res) => {
-  
+
     console.log(req.body)
     mongoose.set('useFindAndModify', false);
 
@@ -186,13 +187,13 @@ exports.addComplaint = (req,res) => {
       }
   }
 
-
 exports.getHostelComplaints = (req,res) => {
-
-  Hostel.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
-  })
   
+  Hostel.findOne({}).then((hostels) => {
+    console.log(hostels.comp.length)
+
+  })
+
 }
 
 exports.getSportsComplaints = (req,res) => {

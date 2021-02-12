@@ -197,6 +197,7 @@ exports.getHostelComplaints = (req,res) => {
 }
 
 exports.getSportsComplaints = (req,res) => {
+  console.log(req.params)
   Sport.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
     res.send(count)
   })

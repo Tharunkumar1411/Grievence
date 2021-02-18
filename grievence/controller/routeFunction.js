@@ -188,42 +188,56 @@ exports.addComplaint = (req,res) => {
   }
 
 exports.getHostelComplaints = (req,res) => {
-  
-  Hostel.findOne({}).then((hostels) => {
-    console.log(hostels.comp.length)
-
+ 
+  Hostel.find({},'comp').then((done) => {
+    console.log()
+    res.send(done)
   })
+  // Hostel.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+  //   res.send(hostels)
+
+  // })
 
 }
 
 exports.getSportsComplaints = (req,res) => {
-  console.log(req.params)
-  Sport.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
+  Sport.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels)
+
   })
 }
 
 exports.getAcademicComplaints = (req,res) => {
-  Academic.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
+  Academic.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels)
+
   })
 }
 
 exports.getRaggingComplaints = (req,res) => {
-  Ragging.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
+  Ragging.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels)
+
   })
 }
 
 exports.getTransportComplaints = (req,res) => {
-  Transport.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
+  Transport.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels)
+
   })
 }
 
 exports.getUnknownComplaints = (req,res) => {
-  Other.aggregate([{$project: { count: { $size:"$comp" }}}]).then(count =>{
-    res.send(count)
+  Other.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels)
+
   })
 }
 

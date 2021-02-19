@@ -5,24 +5,24 @@ const passport = require('passport');
 var routeFunction = require('../controller/routeFunction');
 
 router.post("/jwt",routeFunction.jwt);
-// router.get("/test",routeFunction.test);
+// router.put("/test",routeFunction.test);
 
-// router.get('/auth/google',passport.authenticate('google',{
+// router.put('/auth/google',passport.authenticate('google',{
 //     scope:['profile']
 // }));
 
 //callback route for google to redirect to 
-// router.get('/auth/google/redirect',passport.authenticate('google'),(req,res) => {
+// router.put('/auth/google/redirect',passport.authenticate('google'),(req,res) => {
 //     res.send('you reached the redirect URL');
 // })
 
 router.post("/addComplaint",routeFunction.addComplaint);
 
-router.get("/getHostelComplaints",routeFunction.getHostelComplaints)
-router.get("/getSportsComplaints",routeFunction.getSportsComplaints)
-router.get("/getAcademicComplaints",routeFunction.getAcademicComplaints)
-router.get("/getRaggingComplaints",routeFunction.getRaggingComplaints)
-router.get("/getTransportComplaints",routeFunction.getTransportComplaints)
-router.get("/getUnknownComplaints",routeFunction.getUnknownComplaints)
+router.put("/getHostelComplaints",routeFunction.getHostelComplaints)
+router.put("/getSportsComplaints",routeFunction.getSportsComplaints)
+router.put("/getAcademicComplaints",routeFunction.getAcademicComplaints)
+router.put("/getRaggingComplaints",routeFunction.getRaggingComplaints)
+router.put("/getTransportComplaints",routeFunction.getTransportComplaints)
+router.put("/getUnknownComplaints",routeFunction.getUnknownComplaints)
 
 module.exports = router

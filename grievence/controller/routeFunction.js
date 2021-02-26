@@ -205,8 +205,6 @@ exports.getHostelComplaints = (req,res) => {
 
   })
 
-
-
 }
 
 exports.getSportsComplaints = (req,res) => {
@@ -251,4 +249,10 @@ exports.getUnknownComplaints = (req,res) => {
 
 
 
+exports.HostelComplaints = (req,res) => {
+  Hostel.findOne({"email":req.body.Email}).then((hostels) => {
+ 
+    res.send(hostels);
 
+  })
+}

@@ -24,5 +24,5 @@ router.put("/getAcademicComplaints",routeFunction.getAcademicComplaints)
 router.put("/getRaggingComplaints",routeFunction.getRaggingComplaints)
 router.put("/getTransportComplaints",routeFunction.getTransportComplaints)
 router.put("/getUnknownComplaints",routeFunction.getUnknownComplaints)
-
+router.put("/HostelComplaints",routeFunction.HostelComplaints)
 module.exports = router

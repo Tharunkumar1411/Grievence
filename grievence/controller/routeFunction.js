@@ -189,17 +189,6 @@ exports.addComplaint = (req,res) => {
 
 exports.getHostelComplaints = (req,res) => {
   Hostel.find({},'comp').then((done) => {
-    var array = []
-
-    array.push(done[0].comp.length)
-  
-
-      Hostel.findOne({"email":req.body.Email}).then((hostels) => {
- 
-              console.log(hostels.comp.length)
-              array.push(hostels.comp.length)
-
-  })
   console.log(array)
 
 

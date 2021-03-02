@@ -189,59 +189,33 @@ exports.addComplaint = (req,res) => {
 
 exports.getHostelComplaints = (req,res) => {
   Hostel.find({},'comp').then((done) => {
-  console.log(array)
-
-
+    res.send(done)
   })
 
 }
 
-exports.getSportsComplaints = (req,res) => {
-  Sport.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels)
-
-  })
-}
 
 exports.getAcademicComplaints = (req,res) => {
-  Academic.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels)
-
+  Academic.find({},'comp').then((done) => {
+    res.send(done)
   })
 }
 
 exports.getRaggingComplaints = (req,res) => {
-  Ragging.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels)
-
+  Ragging.find({},'comp').then((done) => {
+    res.send(done)
   })
 }
 
 exports.getTransportComplaints = (req,res) => {
-  Transport.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels)
-
+  Transport.find({},'comp').then((done) => {
+    res.send(done)
   })
 }
 
 exports.getUnknownComplaints = (req,res) => {
-  Other.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels)
-
+  Other.find({},'comp').then((done) => {
+    res.send(done)
   })
-}
 
-
-
-exports.HostelComplaints = (req,res) => {
-  Hostel.findOne({"email":req.body.Email}).then((hostels) => {
- 
-    res.send(hostels);
-
-  })
 }

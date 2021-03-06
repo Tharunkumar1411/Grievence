@@ -188,7 +188,7 @@ exports.addComplaint = (req,res) => {
   }
 
 exports.getHostelComplaints = (req,res) => {
-  Hostel.find({},'comp').then((done) => {
+  Hostel.find({},'comp' & 'suggetion').then((done) => {
     res.send(done)
   })
 

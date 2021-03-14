@@ -19,11 +19,11 @@ exports.jwt = (async(req, res) => {
 
 
 
-            User.findOne({ "id": decoded.id }).then((error, done) => {
+            User.findById(decoded.id).then((error, user) => {
                 if (error) return res.status(500).send({ auth: false, message: 'Failed to access data' });
-                if (!done) return res.status(404).send("No user found.");
+                if (!user) return res.status(404).send("No user found.");
 
-                res.status(200).send(done)
+                res.status(200).send(user)
 
             })
         })

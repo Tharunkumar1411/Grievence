@@ -2,6 +2,7 @@ var { User, Hostel, Academic, Sport, Ragging, Transport, Other } = require('../s
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose');
 const { json } = require("body-parser");
+var bcrypt = require('bcryptjs');
 const cors = require('cors')
 
 
@@ -10,26 +11,69 @@ exports.jwt = (async(req, res) => {
     // console.log("hi")
     const foundUser = await User.findOne({ "email": req.body.email });
     if (foundUser) {
-        // const token = jwt.sign({_id:foundUser._id},process.env.TOKEN_SECRET);
-        // res.header('authorization').send(token)
+        var token = req.headers['x-access-token'];
+        if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
-        res.send("user already exist")
+        jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+            if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-    } else {
-        var datas = new User(req.body)
-        console.log(req.body)
-        datas.save()
-            .then(item => {
-                // const token = jwt.sign({_id:foundUser._id},process.env.TOKEN_SECRET);
-                // res.header('authorization').send(token)
-                res.send("new user added")
+
+
+            User.findOne({ "id": decoded.id }).then((error, done) => {
+                if (error) return res.status(500).send({ auth: false, message: 'Failed to access data' });
+                if (!done) return res.status(404).send("No user found.");
+
+                res.status(200).send(done)
 
             })
-            .catch(err => {
-                res.status(404).send("unable connect database");
-            });
+        })
+
     }
-})
+});
+
+exports.signIn = (async(req, res) => {
+
+    var hashing = bcrypt.hashSync(req.body.password, 8);
+
+    User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashing
+        },
+
+        function(err, user) {
+            if (err) return res.status(500).send("issues to registering a user");
+
+            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 86400 });
+
+            res.status(200).send({ auth: true, token: token });
+        })
+});
+
+
+
+
+
+
+
+
+//         // var datas = new User(req.body)
+//         // console.log(req.body)
+//         // datas.save()
+//         //     .then(item => {
+//         //         const token = jwt.sign({ _id: foundUser._id }, process.env.TOKEN_SECRET);
+//         //         res.header('authorization').send(token)
+
+
+//         //     })
+//         //     .catch(err => {
+//         //         res.status(404).send("unable connect database");
+//         //     });
+//     }
+// })
+
+//})
+
 
 
 //add complaints into separate collection documents
@@ -216,4 +260,3 @@ exports.getUserdetails = (req, res) => {
         res.send(done)
     })
 }
-f

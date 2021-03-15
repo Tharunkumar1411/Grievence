@@ -9,7 +9,7 @@ const cors = require('cors')
 //generate jwt token
 exports.jwt = (async(req, res) => {
     // console.log("hi")
-
+    console.log(req.headers)
     var token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 

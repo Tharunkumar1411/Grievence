@@ -9,26 +9,21 @@ const cors = require('cors')
 //generate jwt token
 exports.jwt = (async(req, res) => {
     // console.log("hi")
-    const foundUser = await User.findOne({ "email": req.body.email });
-    if (foundUser) {
-        var token = req.headers['x-access-token'];
-        if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
-        jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-            if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    var token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
+        // res.send(decoded)
 
-            User.findById(decoded.id).then((error, user) => {
-                if (error) return res.status(500).send({ auth: false, message: 'Failed to access data' });
-                if (!user) return res.status(404).send("No user found.");
-
-                res.status(200).send(user)
-
-            })
+        const foundUser = User.findOne({ "_id": decoded.id }).then((result) => {
+            res.send(result.email)
         })
 
-    }
+    })
+
 });
 
 exports.signIn = (async(req, res) => {
@@ -44,7 +39,7 @@ exports.signIn = (async(req, res) => {
         function(err, user) {
             if (err) return res.status(500).send("issues to registering a user");
 
-            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 86400 });
+            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
 
             res.status(200).send({ auth: true, token: token });
         })

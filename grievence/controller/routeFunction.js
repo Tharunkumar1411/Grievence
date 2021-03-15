@@ -6,7 +6,7 @@ var bcrypt = require('bcryptjs');
 const cors = require('cors')
 
 
-//generate jwt token
+//verify token
 exports.jwt = (async(req, res) => {
     // console.log("hi")
     console.log(req.headers)
@@ -26,6 +26,8 @@ exports.jwt = (async(req, res) => {
 
 });
 
+
+//generate token and create new user db
 exports.signIn = (async(req, res) => {
 
     var hashing = bcrypt.hashSync(req.body.password, 8);
@@ -44,31 +46,6 @@ exports.signIn = (async(req, res) => {
             res.status(200).send({ auth: true, token: token });
         })
 });
-
-
-
-
-
-
-
-
-//         // var datas = new User(req.body)
-//         // console.log(req.body)
-//         // datas.save()
-//         //     .then(item => {
-//         //         const token = jwt.sign({ _id: foundUser._id }, process.env.TOKEN_SECRET);
-//         //         res.header('authorization').send(token)
-
-
-//         //     })
-//         //     .catch(err => {
-//         //         res.status(404).send("unable connect database");
-//         //     });
-//     }
-// })
-
-//})
-
 
 
 //add complaints into separate collection documents

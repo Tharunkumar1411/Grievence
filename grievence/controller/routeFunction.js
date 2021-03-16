@@ -9,7 +9,7 @@ const cors = require('cors')
 //verify token
 exports.jwt = (async(req, res) => {
     // console.log("hi")
-    console.log(req.headers)
+
     var token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
@@ -30,7 +30,7 @@ exports.jwt = (async(req, res) => {
 //generate token and create new user db
 exports.signIn = (async(req, res) => {
 
-    var hashing = bcrypt.hashSync(req.body.password, 8);
+    var hashing = await bcrypt.hashSync(req.body.password, 8);
 
     User.create({
             name: req.body.name,

@@ -19,7 +19,7 @@ router.post("/jwt", routeFunction.jwt);
 router.post("/addComplaint", routeFunction.addComplaint);
 
 router.get("/signIn", routeFunction.signIn);
-router.get('/jwt', routeFunction.jwt)
+router.put('/jwt', routeFunction.jwt)
 
 router.put("/getUserdetails", routeFunction.getUserdetails)
 router.put("/getHostelComplaints", routeFunction.getHostelComplaints)

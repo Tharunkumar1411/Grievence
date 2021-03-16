@@ -30,12 +30,12 @@ exports.jwt = (async(req, res) => {
 //generate token and create new user db
 exports.signIn = (async(req, res) => {
 
-    var hashing = await bcrypt.hashSync(req.body.password, 8);
+    // var hashing = await bcrypt.hashSync(req.body.password, 8);
 
     User.create({
             name: req.body.name,
             email: req.body.email,
-            password: hashing
+            passwor: req.body.password
         },
 
         function(err, user) {

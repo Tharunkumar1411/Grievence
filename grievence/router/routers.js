@@ -18,9 +18,9 @@ router.post("/jwt", routeFunction.jwt);
 
 router.post("/addComplaint", routeFunction.addComplaint);
 
-router.get("/signIn", routeFunction.signIn);
-router.put('/jwt', routeFunction.jwt)
-
+router.put("/signIn", routeFunction.signIn);
+router.put('/jwt', routeFunction.jwt);
+router.put("/deleteAccount", routeFunction.deleteAccount);
 router.put("/getUserdetails", routeFunction.getUserdetails)
 router.put("/getHostelComplaints", routeFunction.getHostelComplaints)
 router.put("/getAcademicComplaints", routeFunction.getAcademicComplaints)

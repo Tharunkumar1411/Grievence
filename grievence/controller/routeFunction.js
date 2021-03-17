@@ -32,10 +32,11 @@ exports.signIn = (async(req, res) => {
 
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
 
+    console.log(req.body)
     User.create({
             name: req.body.name,
             email: req.body.email,
-            passwor: req.body.password
+            password: req.body.password
         },
 
         function(err, user) {
@@ -47,6 +48,12 @@ exports.signIn = (async(req, res) => {
         })
 });
 
+
+exports.deleteAccount = (req, res) => {
+    User.remove({ "email": req.body.cook }).then((done) => {
+        res.send(true)
+    })
+}
 
 //add complaints into separate collection documents
 exports.addComplaint = (req, res) => {

@@ -235,7 +235,7 @@ exports.getUnknownComplaints = (req, res) => {
 
 exports.getUserdetails = (req, res) => {
 
-    User.find({ "email": req.body.Email }).then((done) => {
+    User.find({}).then((done) => {
         res.send(done)
     })
 }

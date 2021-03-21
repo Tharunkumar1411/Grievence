@@ -28,4 +28,10 @@ router.put("/getRaggingComplaints", routeFunction.getRaggingComplaints)
 router.put("/getTransportComplaints", routeFunction.getTransportComplaints)
 router.put("/getUnknownComplaints", routeFunction.getUnknownComplaints)
 
+router.put("/getHostelComplaint", routeFunction.getHostelComplaint)
+router.put("/getAcademicComplaint", routeFunction.getAcademicComplaint)
+router.put("/getRaggingComplaint", routeFunction.getRaggingComplaint)
+router.put("/getTransportComplaint", routeFunction.getTransportComplaint)
+router.put("/getUnknownComplaint", routeFunction.getUnknownComplaint)
+
 module.exports = router

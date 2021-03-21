@@ -233,9 +233,45 @@ exports.getUnknownComplaints = (req, res) => {
 
 }
 
+
 exports.getUserdetails = (req, res) => {
 
     User.find({}).then((done) => {
         res.send(done)
     })
+}
+
+
+//user individual count of complaints
+exports.getHostelComplaint = (req, res) => {
+    Hostel.find({ "email": req.body.Email }, 'comp' & 'suggetion').then((done) => {
+        res.send(done)
+    })
+
+}
+
+
+exports.getAcademicComplaint = (req, res) => {
+    Academic.find({ "email": req.body.Email }, 'comp').then((done) => {
+        res.send(done)
+    })
+}
+
+exports.getRaggingComplaint = (req, res) => {
+    Ragging.find({ "email": req.body.Email }, 'comp').then((done) => {
+        res.send(done)
+    })
+}
+
+exports.getTransportComplaint = (req, res) => {
+    Transport.find({ "email": req.body.Email }, 'comp').then((done) => {
+        res.send(done)
+    })
+}
+
+exports.getUnknownComplaint = (req, res) => {
+    Other.find({ "email": req.body.Email }, 'comp').then((done) => {
+        res.send(done)
+    })
+
 }

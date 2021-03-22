@@ -4,13 +4,15 @@ var mongoose = require('mongoose');
 const { json } = require("body-parser");
 var bcrypt = require('bcryptjs');
 const cors = require('cors')
-
+var dotenv = require("dotenv")
+dotenv.config();
 
 //verify token
 exports.jwt = (async(req, res) => {
-    // console.log("hi")
 
-    var token = req.headers['x-access-token'];
+
+    var token = req.body.jwt;
+
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
@@ -30,13 +32,13 @@ exports.jwt = (async(req, res) => {
 //generate token and create new user db
 exports.signIn = (async(req, res) => {
 
-    // var hashing = await bcrypt.hashSync(req.body.password, 8);
+    var hashing = await bcrypt.hashSync(req.body.password, 8);
 
     console.log(req.body)
     User.create({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password,
+            password: hashing,
             logedIn: new Date().toLocaleDateString(),
         },
 
@@ -51,7 +53,7 @@ exports.signIn = (async(req, res) => {
 
 
 exports.deleteAccount = (req, res) => {
-    User.remove({ "email": req.body.cook }).then((done) => {
+    User.deleteOne({ "email": req.body.cook }).then((done) => {
         res.send(true)
     })
 }
@@ -179,7 +181,7 @@ exports.addComplaint = (req, res) => {
 }
 
 exports.getHostelComplaints = (req, res) => {
-    Hostel.find({}, 'comp' & 'suggetion').then((done) => {
+    Hostel.find({}, 'comp' & 'date').then((done) => {
         res.send(done)
     })
 
@@ -187,25 +189,25 @@ exports.getHostelComplaints = (req, res) => {
 
 
 exports.getAcademicComplaints = (req, res) => {
-    Academic.find({}, 'comp').then((done) => {
+    Academic.find({}, 'comp' & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getRaggingComplaints = (req, res) => {
-    Ragging.find({}, 'comp').then((done) => {
+    Ragging.find({}, 'comp' & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getTransportComplaints = (req, res) => {
-    Transport.find({}, 'comp').then((done) => {
+    Transport.find({}, 'comp' & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getUnknownComplaints = (req, res) => {
-    Other.find({}, 'comp').then((done) => {
+    Other.find({}, 'comp' & 'date').then((done) => {
         res.send(done)
     })
 

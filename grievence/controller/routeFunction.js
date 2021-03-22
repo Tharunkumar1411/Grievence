@@ -1,4 +1,4 @@
-var { User, Hostel, Academic, Sport, Ragging, Transport, Other } = require('../ser/DB/Schema')
+var { User, Hostel, Academic, Ragging, Transport, Other } = require('../ser/DB/Schema')
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose');
 const { json } = require("body-parser");
@@ -36,7 +36,8 @@ exports.signIn = (async(req, res) => {
     User.create({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            logedIn: new Date().toLocaleDateString(),
         },
 
         function(err, user) {
@@ -68,7 +69,7 @@ exports.addComplaint = (req, res) => {
             if (Email !== null) {
 
                 var conditions = { email: req.body.email },
-                    update = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
+                    update = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
                     options = { multi: true };
 
 
@@ -84,34 +85,11 @@ exports.addComplaint = (req, res) => {
                     .then(res.send("successfully hostel data created"))
             }
         })
-
-    } else if (req.body.radio == "Sports") {
-        const foundUser = Sport.findOne({ "email": req.body.email }).then((Email) => {
-            if (Email !== null) {
-                var conditionss = { email: req.body.email },
-                    updatee = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
-                    optionss = { multi: true };
-
-                Sport.findOneAndUpdate(conditionss, updatee, optionss, callback);
-
-
-                function callback(err, numAffected) {
-                    //   console.log(numAffected)
-                    res.send("successfully Sport data added")
-                }
-            } else {
-                var createSportData = new Sport(req.body)
-                createSportData.save()
-                    .then(res.send("successfully Sport data created"))
-            }
-
-        });
-
     } else if (req.body.radio == "Academics") {
         const foundUser = Academic.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var condition = { email: req.body.email },
-                    updat = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
+                    updat = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
                     option = { multi: true };
 
 
@@ -133,7 +111,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Ragging.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Raggingcondition = { email: req.body.email },
-                    RaggingUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
+                    RaggingUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
                     Raggingoption = { multi: true };
 
 
@@ -155,7 +133,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Transport.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Transportcondition = { email: req.body.email },
-                    TransportUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
+                    TransportUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
                     Transportoption = { multi: true };
 
 
@@ -177,7 +155,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Other.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Othercondition = { email: req.body.email },
-                    OtherUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion } },
+                    OtherUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
                     Otheroption = { multi: true };
 
 
@@ -236,7 +214,7 @@ exports.getUnknownComplaints = (req, res) => {
 
 exports.getUserdetails = (req, res) => {
 
-    User.find({}).then((done) => {
+    User.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 }

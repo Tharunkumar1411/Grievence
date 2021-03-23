@@ -181,7 +181,7 @@ exports.addComplaint = (req, res) => {
 }
 
 exports.getHostelComplaints = (req, res) => {
-    Hostel.find({}, 'comp' & 'date').then((done) => {
+    Hostel.find({} & 'date').then((done) => {
         res.send(done)
     })
 
@@ -189,25 +189,25 @@ exports.getHostelComplaints = (req, res) => {
 
 
 exports.getAcademicComplaints = (req, res) => {
-    Academic.find({}, 'comp' & 'date').then((done) => {
+    Academic.find({} & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getRaggingComplaints = (req, res) => {
-    Ragging.find({}, 'comp' & 'date').then((done) => {
+    Ragging.find({} & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getTransportComplaints = (req, res) => {
-    Transport.find({}, 'comp' & 'date').then((done) => {
+    Transport.find({} & 'date').then((done) => {
         res.send(done)
     })
 }
 
 exports.getUnknownComplaints = (req, res) => {
-    Other.find({}, 'comp' & 'date').then((done) => {
+    Other.find({} & 'date').then((done) => {
         res.send(done)
     })
 
@@ -224,33 +224,35 @@ exports.getUserdetails = (req, res) => {
 
 //user individual count of complaints
 exports.getHostelComplaint = (req, res) => {
-    Hostel.find({ "email": req.body.Email }, 'comp' & 'suggetion').then((done) => {
+    console.log(req.body)
+    Hostel.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
+        console.log(done)
     })
 
 }
 
 
 exports.getAcademicComplaint = (req, res) => {
-    Academic.find({ "email": req.body.Email }, 'comp').then((done) => {
+    Academic.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 }
 
 exports.getRaggingComplaint = (req, res) => {
-    Ragging.find({ "email": req.body.Email }, 'comp').then((done) => {
+    Ragging.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 }
 
 exports.getTransportComplaint = (req, res) => {
-    Transport.find({ "email": req.body.Email }, 'comp').then((done) => {
+    Transport.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 }
 
 exports.getUnknownComplaint = (req, res) => {
-    Other.find({ "email": req.body.Email }, 'comp').then((done) => {
+    Other.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 

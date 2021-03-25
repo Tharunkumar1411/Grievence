@@ -77,7 +77,7 @@ exports.addComplaint = (req, res) => {
 
                 Hostel.findOneAndUpdate(conditions, update, options, callback);
 
-                function callback(err, numAffected) {
+                function callback(numAffected) {
                     //   console.log(numAffected)
                     res.send("successfully hostel data added")
                 }
@@ -97,7 +97,7 @@ exports.addComplaint = (req, res) => {
 
                 Academic.findOneAndUpdate(condition, updat, option, callback);
 
-                function callback(err, numAffected) {
+                function callback(numAffected) {
                     //   console.log(numAffected)
                     res.send("successfully Academic data added")
                 }
@@ -119,7 +119,7 @@ exports.addComplaint = (req, res) => {
 
                 Ragging.findOneAndUpdate(Raggingcondition, RaggingUpdate, Raggingoption, callback);
 
-                function callback(err, numAffected) {
+                function callback(numAffected) {
                     //   console.log(numAffected)
                     res.send("successfully Academic data added")
                 }
@@ -141,7 +141,7 @@ exports.addComplaint = (req, res) => {
 
                 Transport.findOneAndUpdate(Transportcondition, TransportUpdate, Transportoption, callback);
 
-                function callback(err, numAffected) {
+                function callback(numAffected) {
                     //   console.log(numAffected)
                     res.send("successfully Transport data added")
                 }
@@ -163,7 +163,7 @@ exports.addComplaint = (req, res) => {
 
                 Other.findOneAndUpdate(Othercondition, OtherUpdate, Otheroption, callback);
 
-                function callback(err, numAffected) {
+                function callback(numAffected) {
                     //   console.log(numAffected)
                     res.send("successfully Other data added")
                 }
@@ -181,7 +181,7 @@ exports.addComplaint = (req, res) => {
 }
 
 exports.getHostelComplaints = (req, res) => {
-    Hostel.find({} & 'date').then((done) => {
+    Hostel.find({}).then((done) => {
         res.send(done)
     })
 
@@ -189,25 +189,25 @@ exports.getHostelComplaints = (req, res) => {
 
 
 exports.getAcademicComplaints = (req, res) => {
-    Academic.find({} & 'date').then((done) => {
+    Academic.find({}).then((done) => {
         res.send(done)
     })
 }
 
 exports.getRaggingComplaints = (req, res) => {
-    Ragging.find({} & 'date').then((done) => {
+    Ragging.find({}).then((done) => {
         res.send(done)
     })
 }
 
 exports.getTransportComplaints = (req, res) => {
-    Transport.find({} & 'date').then((done) => {
+    Transport.find({}).then((done) => {
         res.send(done)
     })
 }
 
 exports.getUnknownComplaints = (req, res) => {
-    Other.find({} & 'date').then((done) => {
+    Other.find({}).then((done) => {
         res.send(done)
     })
 
@@ -224,36 +224,39 @@ exports.getUserdetails = (req, res) => {
 
 //user individual count of complaints
 exports.getHostelComplaint = (req, res) => {
-    console.log(req.body)
-    Hostel.find({ "email": req.body.Email }).then((done) => {
-        res.send(done)
-        console.log(done)
+
+    Hostel.findOne({ "email": req.body.Email }).then((done) => {
+        res.status(200).send(done);
+
     })
 
 }
 
 
 exports.getAcademicComplaint = (req, res) => {
-    Academic.find({ "email": req.body.Email }).then((done) => {
-        res.send(done)
+    Academic.findOne({ "email": req.body.Email }).then((done) => {
+        res.status(200).send(done);
+
     })
 }
 
 exports.getRaggingComplaint = (req, res) => {
-    Ragging.find({ "email": req.body.Email }).then((done) => {
-        res.send(done)
+    Ragging.findOne({ "email": req.body.Email }).then((done) => {
+        res.status(200).send(done);
     })
 }
 
 exports.getTransportComplaint = (req, res) => {
-    Transport.find({ "email": req.body.Email }).then((done) => {
-        res.send(done)
+    Transport.findOne({ "email": req.body.Email }).then((done) => {
+        res.status(200).send(done);
+
     })
 }
 
 exports.getUnknownComplaint = (req, res) => {
-    Other.find({ "email": req.body.Email }).then((done) => {
-        res.send(done)
+    Other.findOne({ "email": req.body.Email }).then((done) => {
+        res.status(200).send(done);
+
     })
 
 }

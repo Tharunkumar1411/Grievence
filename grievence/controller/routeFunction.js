@@ -225,10 +225,13 @@ exports.getUserdetails = (req, res) => {
 //user individual count of complaints
 exports.getHostelComplaint = (req, res) => {
 
-    Hostel.findOne({ "email": req.body.Email }).then((done) => {
-        res.status(200).send(done);
+    var arrya = []
 
-    })
+    Hostel.findOne({}).then((done) => {
+
+        arrya.push(done.comp.length);
+    }).then(console.log(arrya));
+
 
 }
 

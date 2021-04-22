@@ -4,7 +4,7 @@ var router = express.Router();
 const passport = require('passport');
 var routeFunction = require('../controller/routeFunction');
 
-router.post("/jwt", routeFunction.jwt);
+// router.post("/jwt", routeFunction.jwt);
 // router.put("/test",routeFunction.test);
 
 // router.put('/auth/google',passport.authenticate('google',{
@@ -20,12 +20,11 @@ router.post("/addComplaint", routeFunction.addComplaint);
 
 router.put("/signIn", routeFunction.signIn);
 router.put('/jwt', routeFunction.jwt);
+
 router.put("/deleteAccount", routeFunction.deleteAccount);
+
 router.put("/getUserdetails", routeFunction.getUserdetails)
-
 router.put("/getComplaintData", routeFunction.getComplaintData)
-
-
 router.post("/getComplaintCount", routeFunction.getComplaintCount)
 
 

@@ -22,11 +22,9 @@ router.put("/signIn", routeFunction.signIn);
 router.put('/jwt', routeFunction.jwt);
 router.put("/deleteAccount", routeFunction.deleteAccount);
 router.put("/getUserdetails", routeFunction.getUserdetails)
-router.put("/getHostelComplaints", routeFunction.getHostelComplaints)
-router.put("/getAcademicComplaints", routeFunction.getAcademicComplaints)
-router.put("/getRaggingComplaints", routeFunction.getRaggingComplaints)
-router.put("/getTransportComplaints", routeFunction.getTransportComplaints)
-router.put("/getUnknownComplaints", routeFunction.getUnknownComplaints)
+
+router.put("/getComplaintData", routeFunction.getComplaintData)
+
 
 router.post("/getComplaintCount", routeFunction.getComplaintCount)
 

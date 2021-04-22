@@ -180,37 +180,84 @@ exports.addComplaint = (req, res) => {
     }
 }
 
-exports.getHostelComplaints = (req, res) => {
-    Hostel.find({}).then((done) => {
-        res.send(done)
-    })
+exports.getComplaintData = (req, res) => {
+    if (req.body.section == "HOSTEL") {
+        Hostel.find({}).then((done) => {
+            res.send(done)
+        })
+    } else if (req.body.section == "ACADEMIC") {
+        Academic.find({}).then((done) => {
+            res.send(done)
+        })
+    } else if (req.body.section == "TRANSPORT") {
+        Transport.find({}).then((done) => {
+            res.send(done)
+        })
+    } else if (req.body.section == "RAGGING") {
+        Ragging.find({}).then((done) => {
+            res.send(done)
+        })
+    } else if (req.body.section == "OTHERS") {
+        Other.find({}).then((done) => {
+            res.send(done)
+        })
+    }
+
 
 }
 
 
-exports.getAcademicComplaints = (req, res) => {
-    Academic.find({}).then((done) => {
-        res.send(done)
-    })
-}
+exports.getComplaintData = async(req, res) => {
 
-exports.getRaggingComplaints = (req, res) => {
-    Ragging.find({}).then((done) => {
-        res.send(done)
-    })
-}
+    var dataArray = [];
 
-exports.getTransportComplaints = (req, res) => {
-    Transport.find({}).then((done) => {
-        res.send(done)
-    })
-}
+    var hostelArray = await Hostel.find({}).then(function(done) {
+        return (done.comp);
+    });
+    console.log(hostelArray);
 
-exports.getUnknownComplaints = (req, res) => {
-    Other.find({}).then((done) => {
-        res.send(done)
-    })
 
+    // var academicArray = await Academic.findOne({}).then((done) => {
+
+    //     try {
+    //         return done.comp.length;
+    //     } catch (error) {
+    //         return 0;
+    //     }
+    // });
+    // totalArray.push(academicArray);
+
+    // var raggingArray = await Ragging.findOne({ }).then((done) => {
+    //     try {
+    //         return done.comp.length;
+    //     } catch (error) {
+    //         return 0;
+    //     }
+    // });
+    // totalArray.push(raggingArray);
+
+    // var transportArray = await Transport.findOne({}).then((done) => {
+    //     try {
+    //         return done.comp.length;
+    //     } catch (error) {
+    //         return 0;
+    //     }
+
+    // });
+    // totalArray.push(transportArray);
+
+    // var otherArray = await Other.findOne({}).then((done) => {
+    //     try {
+    //         return done.comp.length;
+    //     } catch (error) {
+    //         return 0;
+    //     }
+    // })
+    // totalArray.push(otherArray);
+    // console.log(totalArray);
+    // res.status(200).send(totalArray);
+
+    // }
 }
 
 
@@ -278,32 +325,3 @@ exports.getComplaintCount = async(req, res) => {
     res.status(200).send(totalArray);
 
 }
-
-
-// exports.getAcademicComplaint = (req, res) => {
-//     Academic.findOne({ "email": req.body.Email }).then((done) => {
-//         res.status(200).send(done);
-
-//     })
-// }
-
-// exports.getRaggingComplaint = (req, res) => {
-//     Ragging.findOne({ "email": req.body.Email }).then((done) => {
-//         res.status(200).send(done);
-//     })
-// }
-
-// exports.getTransportComplaint = (req, res) => {
-//     Transport.findOne({ "email": req.body.Email }).then((done) => {
-//         res.status(200).send(done);
-
-//     })
-// }
-
-// exports.getUnknownComplaint = (req, res) => {
-//     Other.findOne({ "email": req.body.Email }).then((done) => {
-//         res.status(200).send(done);
-
-//     })
-
-// }

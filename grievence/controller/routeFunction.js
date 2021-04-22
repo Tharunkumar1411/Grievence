@@ -209,56 +209,65 @@ exports.getComplaintData = (req, res) => {
 
 exports.getComplaintData = async(req, res) => {
 
-    var dataArray = [];
+    var totalArray = [];
 
     var hostelArray = await Hostel.find({}).then(function(done) {
-        return (done.comp);
+        var sum = 0
+        for (let index = 0; index < done.length; index++) {
+
+            sum = sum + done[index].comp.length;
+        }
+        return sum;
     });
-    console.log(hostelArray);
+    totalArray.push(hostelArray);
 
 
-    // var academicArray = await Academic.findOne({}).then((done) => {
+    var academicArray = await Academic.find({}).then((done) => {
 
-    //     try {
-    //         return done.comp.length;
-    //     } catch (error) {
-    //         return 0;
-    //     }
-    // });
-    // totalArray.push(academicArray);
+        var sum = 0
+        for (let index = 0; index < done.length; index++) {
 
-    // var raggingArray = await Ragging.findOne({ }).then((done) => {
-    //     try {
-    //         return done.comp.length;
-    //     } catch (error) {
-    //         return 0;
-    //     }
-    // });
-    // totalArray.push(raggingArray);
+            sum = sum + done[index].comp.length;
+        }
+        return sum;
+    });
+    totalArray.push(academicArray);
 
-    // var transportArray = await Transport.findOne({}).then((done) => {
-    //     try {
-    //         return done.comp.length;
-    //     } catch (error) {
-    //         return 0;
-    //     }
+    var raggingArray = await Ragging.find({}).then((done) => {
+        var sum = 0
+        for (let index = 0; index < done.length; index++) {
 
-    // });
-    // totalArray.push(transportArray);
+            sum = sum + done[index].comp.length;
+        }
+        return sum;
+    });
+    totalArray.push(raggingArray);
 
-    // var otherArray = await Other.findOne({}).then((done) => {
-    //     try {
-    //         return done.comp.length;
-    //     } catch (error) {
-    //         return 0;
-    //     }
-    // })
-    // totalArray.push(otherArray);
-    // console.log(totalArray);
-    // res.status(200).send(totalArray);
+    var transportArray = await Transport.find({}).then((done) => {
+        var sum = 0
+        for (let index = 0; index < done.length; index++) {
 
-    // }
+            sum = sum + done[index].comp.length;
+        }
+        return sum;
+
+    });
+    totalArray.push(transportArray);
+
+    var otherArray = await Other.find({}).then((done) => {
+        var sum = 0
+        for (let index = 0; index < done.length; index++) {
+
+            sum = sum + done[index].comp.length;
+        }
+        return sum;
+    })
+    totalArray.push(otherArray);
+
+    res.status(200).send(totalArray);
+
 }
+
 
 
 exports.getUserdetails = (req, res) => {

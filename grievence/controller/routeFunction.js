@@ -223,43 +223,87 @@ exports.getUserdetails = (req, res) => {
 
 
 //user individual count of complaints
-exports.getHostelComplaint = (req, res) => {
+exports.getComplaintCount = async(req, res) => {
 
-    var arrya = []
+    var totalArray = []
+    console.log(req.body.Email);
+    var hostelArray = await Hostel.findOne({ "email": req.body.Email }).then(function(done) {
 
-    Hostel.findOne({}).then((done) => {
+        try {
+            return done.comp.length;
+        } catch (error) {
+            return 0;
+        }
+    });
+    totalArray.push(hostelArray);
 
-        arrya.push(done.comp.length);
-    }).then(console.log(arrya));
+    var academicArray = await Academic.findOne({ "email": req.body.Email }).then((done) => {
 
+        try {
+            return done.comp.length;
+        } catch (error) {
+            return 0;
+        }
+    });
+    totalArray.push(academicArray);
 
-}
+    var raggingArray = await Ragging.findOne({ "email": req.body.Email }).then((done) => {
+        try {
+            return done.comp.length;
+        } catch (error) {
+            return 0;
+        }
+    });
+    totalArray.push(raggingArray);
 
+    var transportArray = await Transport.findOne({ "email": req.body.Email }).then((done) => {
+        try {
+            return done.comp.length;
+        } catch (error) {
+            return 0;
+        }
 
-exports.getAcademicComplaint = (req, res) => {
-    Academic.findOne({ "email": req.body.Email }).then((done) => {
-        res.status(200).send(done);
+    });
+    totalArray.push(transportArray);
 
+    var otherArray = await Other.findOne({ "email": req.body.Email }).then((done) => {
+        try {
+            return done.comp.length;
+        } catch (error) {
+            return 0;
+        }
     })
-}
-
-exports.getRaggingComplaint = (req, res) => {
-    Ragging.findOne({ "email": req.body.Email }).then((done) => {
-        res.status(200).send(done);
-    })
-}
-
-exports.getTransportComplaint = (req, res) => {
-    Transport.findOne({ "email": req.body.Email }).then((done) => {
-        res.status(200).send(done);
-
-    })
-}
-
-exports.getUnknownComplaint = (req, res) => {
-    Other.findOne({ "email": req.body.Email }).then((done) => {
-        res.status(200).send(done);
-
-    })
+    totalArray.push(otherArray);
+    console.log(totalArray);
+    res.status(200).send(totalArray);
 
 }
+
+
+// exports.getAcademicComplaint = (req, res) => {
+//     Academic.findOne({ "email": req.body.Email }).then((done) => {
+//         res.status(200).send(done);
+
+//     })
+// }
+
+// exports.getRaggingComplaint = (req, res) => {
+//     Ragging.findOne({ "email": req.body.Email }).then((done) => {
+//         res.status(200).send(done);
+//     })
+// }
+
+// exports.getTransportComplaint = (req, res) => {
+//     Transport.findOne({ "email": req.body.Email }).then((done) => {
+//         res.status(200).send(done);
+
+//     })
+// }
+
+// exports.getUnknownComplaint = (req, res) => {
+//     Other.findOne({ "email": req.body.Email }).then((done) => {
+//         res.status(200).send(done);
+
+//     })
+
+// }

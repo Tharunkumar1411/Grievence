@@ -181,23 +181,23 @@ exports.addComplaint = (req, res) => {
 }
 
 exports.getComplaintData = (req, res) => {
-    if (req.body.section == "HOSTEL") {
+    if (req.body.section === "HOSTEL") {
         Hostel.find({}).then((done) => {
             res.send(done)
         })
-    } else if (req.body.section == "ACADEMIC") {
+    } else if (req.body.section === "ACADEMIC") {
         Academic.find({}).then((done) => {
             res.send(done)
         })
-    } else if (req.body.section == "TRANSPORT") {
+    } else if (req.body.section === "TRANSPORT") {
         Transport.find({}).then((done) => {
             res.send(done)
         })
-    } else if (req.body.section == "RAGGING") {
+    } else if (req.body.section === "RAGGING") {
         Ragging.find({}).then((done) => {
             res.send(done)
         })
-    } else if (req.body.section == "OTHERS") {
+    } else if (req.body.section === "OTHERS") {
         Other.find({}).then((done) => {
             res.send(done)
         })
@@ -207,7 +207,7 @@ exports.getComplaintData = (req, res) => {
 }
 
 
-exports.getComplaintData = async(req, res) => {
+exports.getComplaintDataCount = async(req, res) => {
 
     var totalArray = [];
 

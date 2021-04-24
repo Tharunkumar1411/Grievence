@@ -282,7 +282,7 @@ exports.getUserdetails = (req, res) => {
 exports.getComplaintCount = async(req, res) => {
 
     var totalArray = []
-    console.log(req.body.Email);
+
     var hostelArray = await Hostel.findOne({ "email": req.body.Email }).then(function(done) {
 
         try {
@@ -330,7 +330,7 @@ exports.getComplaintCount = async(req, res) => {
         }
     })
     totalArray.push(otherArray);
-    console.log(totalArray);
+
     res.status(200).send(totalArray);
 
 }

@@ -34,11 +34,11 @@ exports.signIn = (async(req, res) => {
 
 
 
-    var hashing = await bcrypt.hashSync(req.body.password, 8);
+    // var hashing = await bcrypt.hashSync(req.body.password, 8);
     User.create({
             name: req.body.name,
             email: req.body.email,
-            password: hashing,
+            password: req.body.password,
             logedIn: new Date().toLocaleDateString(),
         },
 
@@ -271,7 +271,7 @@ exports.getComplaintDataCount = async(req, res) => {
 
 //individual details
 exports.getUserdetails = (req, res) => {
-    User.find({ "email": req.body.Email }).then((done) => {
+    User.findOne({ "email": req.body.Email }).then((done) => {
         res.send(done)
     })
 }

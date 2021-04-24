@@ -23,9 +23,10 @@ router.put('/jwt', routeFunction.jwt);
 
 router.put("/deleteAccount", routeFunction.deleteAccount);
 
-router.put("/getUserdetails", routeFunction.getUserdetails)
-router.put("/getComplaintData", routeFunction.getComplaintData)
-router.post("/getComplaintCount", routeFunction.getComplaintCount)
-
+router.put("/getUserdetails", routeFunction.getUserdetails);
+router.put("/getComplaintData", routeFunction.getComplaintData);
+router.post("/getComplaintCount", routeFunction.getComplaintCount);
+router.put("/getComplaintDataCount", routeFunction.getComplaintDataCount);
+router.put('/getTotalUserDetails', routeFunction.getTotalUserDetails);
 
 module.exports = router

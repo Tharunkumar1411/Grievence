@@ -32,9 +32,9 @@ exports.jwt = (async(req, res) => {
 //generate token and create new user db
 exports.signIn = (async(req, res) => {
 
-    var hashing = await bcrypt.hashSync(req.body.password, 8);
 
-    console.log(req.body)
+
+    var hashing = await bcrypt.hashSync(req.body.password, 8);
     User.create({
             name: req.body.name,
             email: req.body.email,
@@ -269,11 +269,17 @@ exports.getComplaintDataCount = async(req, res) => {
 }
 
 
-
+//individual details
 exports.getUserdetails = (req, res) => {
-
     User.find({ "email": req.body.Email }).then((done) => {
         res.send(done)
+    })
+}
+
+//TOTAL USER DETAILS 
+exports.getTotalUserDetails = (req, res) => {
+    User.find({}).then((done) => {
+        res.status(200).send(done.length);
     })
 }
 

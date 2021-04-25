@@ -279,7 +279,7 @@ exports.getUserdetails = (req, res) => {
 //TOTAL USER DETAILS 
 exports.getTotalUserDetails = (req, res) => {
     User.find({}).then((done) => {
-        res.status(200).send(done.length);
+        res.status(200).send(done);
     })
 }
 

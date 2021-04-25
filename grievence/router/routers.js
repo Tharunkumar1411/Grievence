@@ -24,6 +24,7 @@ router.put('/jwt', routeFunction.jwt);
 router.put("/deleteAccount", routeFunction.deleteAccount);
 
 router.put("/getUserdetails", routeFunction.getUserdetails);
+router.put("/getTotalUserDetails", routeFunction.getTotalUserDetails);
 router.put("/getComplaintData", routeFunction.getComplaintData);
 router.post("/getComplaintCount", routeFunction.getComplaintCount);
 router.put("/getComplaintDataCount", routeFunction.getComplaintDataCount);

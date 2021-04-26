@@ -340,3 +340,16 @@ exports.getComplaintCount = async(req, res) => {
     res.status(200).send(totalArray);
 
 }
+
+exports.removeRespondedData = (req, res) => {
+    var model = req.body.section;
+    if (model === 'Hostel') {
+        Hostel.find({ "email": req.body.mail }).then((doc) => {
+            doc["comp"] = "comp";
+            doc[req.body.complaint] = ["tharun"];
+            doc.save();
+            console.log(doc);
+        })
+    }
+
+}

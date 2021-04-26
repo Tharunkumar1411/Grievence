@@ -23,6 +23,7 @@ router.put('/jwt', routeFunction.jwt);
 
 router.put("/deleteAccount", routeFunction.deleteAccount);
 
+router.put("/removeRespondedData", routeFunction.removeRespondedData);
 router.put("/getUserdetails", routeFunction.getUserdetails);
 router.put("/getTotalUserDetails", routeFunction.getTotalUserDetails);
 router.put("/getComplaintData", routeFunction.getComplaintData);

@@ -343,13 +343,46 @@ exports.getComplaintCount = async(req, res) => {
 
 exports.removeRespondedData = (req, res) => {
     var model = req.body.section;
-    if (model === 'Hostel') {
-        Hostel.find({ "email": req.body.mail }).then((doc) => {
-            doc["comp"] = "comp";
-            doc[req.body.complaint] = ["tharun"];
-            doc.save();
-            console.log(doc);
-        })
+
+    var condition = { email: req.body.mail },
+        update = { $pull: { comp: req.body.complaint, suggetion: req.body.suggetion } },
+        option = { multi: true };
+
+    if (model === "Hostel") {
+        Hostel.findOneAndUpdate(condition, update, option, callback);
+
+        function callback(numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Hostel data Removed")
+        }
+    } else if (model === 'Academic') {
+        Academic.findOneAndUpdate(condition, update, option, callback);
+
+        function callback(numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Hostel data Removed")
+        }
+    } else if (model === 'Ragging') {
+        Ragging.findOneAndUpdate(condition, update, option, callback);
+
+        function callback(numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Hostel data Removed")
+        }
+    } else if (model === 'Transport') {
+        Transport.findOneAndUpdate(condition, update, option, callback);
+
+        function callback(numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Hostel data Removed")
+        }
+    } else if (model === 'Other') {
+        Other.findOneAndUpdate(condition, update, option, callback);
+
+        function callback(numAffected) {
+            //   console.log(numAffected)
+            res.send("successfully Hostel data Removed")
+        }
     }
 
 }

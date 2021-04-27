@@ -18,7 +18,6 @@ exports.jwt = (async(req, res) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-        // res.send(decoded)
 
         const foundUser = User.findOne({ "_id": decoded.id }).then((result) => {
             res.send(result.email)
@@ -31,8 +30,6 @@ exports.jwt = (async(req, res) => {
 
 //generate token and create new user db
 exports.signIn = (async(req, res) => {
-
-
 
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
     User.create({
@@ -180,6 +177,8 @@ exports.addComplaint = (req, res) => {
     }
 }
 
+
+//get whole complaint document section wise
 exports.getComplaintData = (req, res) => {
     if (req.body.section === "HOSTEL") {
         Hostel.find({}).then((done) => {
@@ -207,6 +206,7 @@ exports.getComplaintData = (req, res) => {
 }
 
 
+//get no of complaint data count in documents
 exports.getComplaintDataCount = async(req, res) => {
 
     var totalArray = [];
@@ -340,6 +340,8 @@ exports.getComplaintCount = async(req, res) => {
     res.status(200).send(totalArray);
 
 }
+
+//after responded complaints remove from db
 
 exports.removeRespondedData = (req, res) => {
     var model = req.body.section;

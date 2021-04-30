@@ -32,20 +32,31 @@ exports.jwt = (async(req, res) => {
 exports.signIn = (async(req, res) => {
 
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
-    User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            logedIn: new Date().toLocaleDateString(),
-        },
+    const foundUser = User.findOne({ "email": req.body.email }).then((done) => {
+        if (done !== null) {
+            res.status(200).send("ALLOWUSER");
 
-        function(err, user) {
-            if (err) return res.status(500).send("issues to registering a user");
+        } else {
+            User.create({
 
-            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                    logedIn: new Date().toLocaleDateString(),
+                },
 
-            res.status(200).send({ auth: true, token: token });
-        })
+                function(err, user) {
+                    if (err) return res.status(500).send("issues to registering a user");
+
+                    const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
+
+                    res.status(200).send({ auth: true, token: token });
+                })
+        }
+    })
+
+
+
 });
 
 

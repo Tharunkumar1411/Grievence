@@ -2,33 +2,28 @@ var express = require("express");
 var router = express.Router();
 
 const passport = require('passport');
-var routeFunction = require('../controller/routeFunction');
+var AuthFunctions = require('../controller/AuthFunctions');
+var ComplaintFunctions = require('../controller/ComplaintFunctions');
+var AccountFunctions = require('../controller/AccountFunctions');
 
-// router.post("/jwt", routeFunction.jwt);
-// router.put("/test",routeFunction.test);
 
-// router.put('/auth/google',passport.authenticate('google',{
-//     scope:['profile']
-// }));
 
-//callback route for google to redirect to 
-// router.put('/auth/google/redirect',passport.authenticate('google'),(req,res) => {
-//     res.send('you reached the redirect URL');
-// })
+//Auth
 
-router.post("/addComplaint", routeFunction.addComplaint);
+router.put("/signIn", AuthFunctions.signIn);
+router.put('/jwt', AuthFunctions.jwt);
 
-router.put("/signIn", routeFunction.signIn);
-router.put('/jwt', routeFunction.jwt);
 
-router.put("/deleteAccount", routeFunction.deleteAccount);
+//complaint
+router.post("/addComplaint", ComplaintFunctions.addComplaint);
+router.put("/getComplaintData", ComplaintFunctions.getComplaintData);
+router.post("/getComplaintCount", ComplaintFunctions.getComplaintCount);
+router.put("/getComplaintDataCount", ComplaintFunctions.getComplaintDataCount);
 
-router.put("/removeRespondedData", routeFunction.removeRespondedData);
-router.put("/getUserdetails", routeFunction.getUserdetails);
-router.put("/getTotalUserDetails", routeFunction.getTotalUserDetails);
-router.put("/getComplaintData", routeFunction.getComplaintData);
-router.post("/getComplaintCount", routeFunction.getComplaintCount);
-router.put("/getComplaintDataCount", routeFunction.getComplaintDataCount);
-router.put('/getTotalUserDetails', routeFunction.getTotalUserDetails);
+//Account
+router.put("/deleteAccount", AccountFunctions.deleteAccount);
+router.put("/getUserdetails", AccountFunctions.getUserdetails);
+router.put("/getTotalUserDetails", AccountFunctions.getTotalUserDetails);
+router.put("/removeRespondedData", AccountFunctions.removeRespondedData);
 
-module.exports = router
+module.exports = router;

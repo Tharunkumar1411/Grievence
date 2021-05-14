@@ -32,7 +32,7 @@ exports.jwt = (async(req, res) => {
 exports.signIn = (async(req, res) => {
 
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
-    const foundUser = User.findOne({ "email": req.body.email }).then((done) => {
+    const foundUser = User.findOne({ "password": req.body.password }).then((done) => {
         if (done !== null) {
             res.status(200).send("ALLOWUSER");
 

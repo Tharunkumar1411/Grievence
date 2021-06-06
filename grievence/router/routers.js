@@ -1,10 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
-const passport = require('passport');
 var AuthFunctions = require('../controller/AuthFunctions');
 var ComplaintFunctions = require('../controller/ComplaintFunctions');
 var AccountFunctions = require('../controller/AccountFunctions');
+const passport = require("passport");
+
+//Passport.js auth
+
 
 
 

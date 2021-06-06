@@ -4,10 +4,10 @@ const keys = require('./keys');
 
 passport.use(
     new GoggleStrategy({
-        clientID:keys.google.clientID,
-        clientSecret:keys.google.clientSecret,
-        callbackURL:'/auth/google/redirect'
-    },(accessToken,refreshToken,profile,done) => {
+        clientID: keys.google.clientID,
+        clientSecret: keys.google.clientSecret,
+        callbackURL: '/google/redirect'
+    }, (accessToken, refreshToken, profile, done) => {
         //passport callback function
         console.log("passport callback function fired")
         console.log(profile)

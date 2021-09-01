@@ -33,7 +33,11 @@ exports.signIn = (async(req, res) => {
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
     const foundUser = User.findOne({ "password": req.body.password }).then((done) => {
         if (done !== null) {
-            res.status(200).send("ALLOWUSER");
+
+            let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
+
+            res.status(200).send({ sign: true, token: token });
+            
 
         } else {
             User.create({

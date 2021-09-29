@@ -9,7 +9,7 @@ dotenv.config();
 
 exports.jwt = (async(req, res) => {
 
-
+    console.log(req.body)
     var token = req.body.jwt;
 
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });

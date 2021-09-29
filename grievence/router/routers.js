@@ -22,6 +22,7 @@ router.post("/addComplaint", ComplaintFunctions.addComplaint);
 router.put("/getComplaintData", ComplaintFunctions.getComplaintData);
 router.post("/getComplaintCount", ComplaintFunctions.getComplaintCount);
 router.put("/getComplaintDataCount", ComplaintFunctions.getComplaintDataCount);
+router.put("/getDetailsForChart", ComplaintFunctions.getDetailsForChart);
 
 //Account
 router.put("/deleteAccount", AccountFunctions.deleteAccount);

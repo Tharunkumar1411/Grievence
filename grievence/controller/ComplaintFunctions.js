@@ -258,6 +258,7 @@ exports.getComplaintCount = async(req, res) => {
     });
     totalArray.push(transportArray);
 
+    
     var otherArray = await Other.findOne({ "email": req.body.Email }).then((done) => {
         try {
             return done.comp.length;
@@ -268,5 +269,31 @@ exports.getComplaintCount = async(req, res) => {
     totalArray.push(otherArray);
 
     res.status(200).send(totalArray);
+
+}
+
+exports.getDetailsForChart = (req,res) => {
+    // console.log(req.body.email)
+    var resData = [];
+
+
+    const data = Hostel.findOne({email: req.body.email}).then((done) => {
+    // console.log(done.comp)
+
+        try {
+            return done.comp;
+        } catch (error) {
+            return 0;
+        }
+
+    });
+
+    data.then((result) => {
+        resData.push(result);
+
+    }) 
+
+    console.log(resData,"resdata");
+
 
 }

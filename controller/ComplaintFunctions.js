@@ -272,28 +272,53 @@ exports.getComplaintCount = async(req, res) => {
 
 }
 
-exports.getDetailsForChart = (req,res) => {
+exports.getDetailsForChart = async(req,res) => {
     // console.log(req.body.email)
     var resData = [];
 
-
-    const data = Hostel.findOne({email: req.body.email}).then((done) => {
-    // console.log(done.comp)
-
+    const queryHostel = await Hostel.find({email: req.body.email}).then((done) => {
         try {
-            return done.comp;
+            return done[0].comp;
         } catch (error) {
-            return 0;
+            return [0];
+        }});
+    resData.push(queryHostel);
+
+    const queryTransport = await Transport.find({email: req.body.email}).then((done) => {
+        try {
+            return done[0].comp;
+        } catch (error) {
+            return [0];
         }
-
     });
+    resData.push(queryTransport);
 
-    data.then((result) => {
-        resData.push(result);
+    const queryAcademic = await Academic.find({email: req.body.email}).then((done) => {
+        try {
+            return done[0].comp;
+        } catch (error) {
+            return [0];
+        }
+    });
+    resData.push(queryAcademic);
 
-    }) 
+    const queryRagging = await Ragging.find({email: req.body.email}).then((done) => {
+        try {
+            return done[0].comp;
+        } catch (error) {
+            return [0];
+        }
+    });
+    resData.push(queryRagging);
 
-    console.log(resData,"resdata");
-
-
+    const queryOther = await Other.find({email: req.body.email}).then((done) => {
+        try {
+            return done[0].comp;
+        } catch (error) {
+            return [0];
+        }
+    });
+    resData.push(queryOther);
+    
+    res.send(resData);
 }

@@ -273,53 +273,58 @@ exports.getComplaintCount = async(req, res) => {
 }
 
 exports.getDetailsForChart = async(req,res) => {
-    var resData = [];
+    var totalArray = []
 
-    const queryHostel = await Hostel.find({email: req.query.email}).then((done) => {
-        try {
-            return done[0].comp;
-        } catch (error) {
-            return [0];
-        }});
-    resData.push(queryHostel);
+    var hostelArray = await Hostel.findOne({ "email": req.query.Email }).then(function(done) {
 
-    const queryTransport = await Transport.find({email: req.body.email}).then((done) => {
         try {
-            return done[0].comp;
+            return done.comp;
         } catch (error) {
-            return [0];
+            return 0;
         }
     });
-    resData.push(queryTransport);
+    totalArray.push(hostelArray);
 
-    const queryAcademic = await Academic.find({email: req.body.email}).then((done) => {
+    var academicArray = await Academic.findOne({ "email": req.query.Email }).then((done) => {
+
         try {
-            return done[0].comp;
+            return done.comp;
         } catch (error) {
-            return [0];
+            return 0;
         }
     });
-    resData.push(queryAcademic);
+    totalArray.push(academicArray);
 
-    const queryRagging = await Ragging.find({email: req.body.email}).then((done) => {
+    var raggingArray = await Ragging.findOne({ "email": req.query.Email }).then((done) => {
         try {
-            return done[0].comp;
+            return done.comp;
         } catch (error) {
-            return [0];
+            return 0;
         }
     });
-    resData.push(queryRagging);
+    totalArray.push(raggingArray);
 
-    const queryOther = await Other.find({email: req.body.email}).then((done) => {
+    var transportArray = await Transport.findOne({ "email": req.query.Email }).then((done) => {
         try {
-            return done[0].comp;
+            return done.comp;
         } catch (error) {
-            return [0];
+            return 0;
         }
+
     });
-    resData.push(queryOther);
+    totalArray.push(transportArray);
+
     
-    resData = [...resData[0], ...resData[1], ...resData[2], ...resData[3], ...resData[4]]
-    res.send(resData);
-    // console.log(resData);
+    var otherArray = await Other.findOne({ "email": req.query.Email }).then((done) => {
+        try {
+            return done.comp;
+        } catch (error) {
+            return 0;
+        }
+    })
+    totalArray.push(otherArray);
+
+    totalArray = [...totalArray[0], ...totalArray[1], ...totalArray[2], ...totalArray[3], ...totalArray[4]]
+
+    res.send(totalArray)
 }

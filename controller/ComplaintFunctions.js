@@ -273,10 +273,9 @@ exports.getComplaintCount = async(req, res) => {
 }
 
 exports.getDetailsForChart = async(req,res) => {
-    // console.log(req.body.email)
     var resData = [];
 
-    const queryHostel = await Hostel.find({email: req.body.email}).then((done) => {
+    const queryHostel = await Hostel.find({email: req.query.email}).then((done) => {
         try {
             return done[0].comp;
         } catch (error) {
@@ -320,5 +319,7 @@ exports.getDetailsForChart = async(req,res) => {
     });
     resData.push(queryOther);
     
+    resData = [...resData[0], ...resData[1], ...resData[2], ...resData[3], ...resData[4]]
     res.send(resData);
+    // console.log(resData);
 }

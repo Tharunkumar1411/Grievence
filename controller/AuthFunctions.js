@@ -9,7 +9,6 @@ dotenv.config();
 
 exports.jwt = (async(req, res) => {
 
-    console.log(req.body)
     var token = req.body.jwt;
 
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
@@ -31,12 +30,17 @@ exports.jwt = (async(req, res) => {
 exports.signIn = (async(req, res) => {
 
     // var hashing = await bcrypt.hashSync(req.body.password, 8);
-    const foundUser = User.findOne({ "password": req.body.password }).then((done) => {
+    const foundUser = User.findOne({ "email": req.body.email }).then((done) => {
         if (done !== null) {
 
             let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
 
-            res.status(200).send({ sign: true, token: token });
+            User.findOne({"password": req.body.password}).then((done) => {
+                res.status(200).send({ sign: true, token: token });
+            }).catch(err => {
+                res.status(200).send({ sign: false, token: token });
+
+            })
             
 
         } else {

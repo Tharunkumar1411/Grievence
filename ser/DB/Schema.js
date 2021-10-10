@@ -51,9 +51,11 @@ var academicsSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
     status: {
-        type: String
+        type: Array
     }
 });
 var Academic = mongoose.model("Academic", academicsSchema);
@@ -73,9 +75,11 @@ var raggingSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
     status: {
-        type: String
+        type: Array
     }
 
 });
@@ -94,9 +98,11 @@ var transportSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
     status: {
-        type: String
+        type: Array
     }
 
 });
@@ -116,9 +122,11 @@ var otherSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
     status: {
-        type: String
+        type: Array
     }
 });
 var Other = mongoose.model("Other", otherSchema);

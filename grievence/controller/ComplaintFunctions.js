@@ -10,24 +10,22 @@ dotenv.config();
 
 exports.addComplaint = (req, res) => {
 
-    console.log(req.body)
     mongoose.set('useFindAndModify', false);
 
     if (req.body.radio === "Hostel") {
 
         const foundUser = Hostel.findOne({ "email": req.body.email }).then((Email) => {
-            console.log(Email)
+
             if (Email !== null) {
 
                 var conditions = { email: req.body.email },
-                    update = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
+                    update = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date, status: "pending" } },
                     options = { multi: true };
 
 
                 Hostel.findOneAndUpdate(conditions, update, options, callback);
 
                 function callback(numAffected) {
-                    //   console.log(numAffected)
                     res.send("successfully hostel data added")
                 }
             } else {
@@ -40,14 +38,13 @@ exports.addComplaint = (req, res) => {
         const foundUser = Academic.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var condition = { email: req.body.email },
-                    updat = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
+                    updat = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date, status: "pending" } },
                     option = { multi: true };
 
 
                 Academic.findOneAndUpdate(condition, updat, option, callback);
 
                 function callback(numAffected) {
-                    //   console.log(numAffected)
                     res.send("successfully Academic data added")
                 }
             } else {
@@ -62,7 +59,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Ragging.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Raggingcondition = { email: req.body.email },
-                    RaggingUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
+                    RaggingUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date, status: "pending" } },
                     Raggingoption = { multi: true };
 
 
@@ -84,7 +81,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Transport.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Transportcondition = { email: req.body.email },
-                    TransportUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
+                    TransportUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date, status: "pending" } },
                     Transportoption = { multi: true };
 
 
@@ -106,7 +103,7 @@ exports.addComplaint = (req, res) => {
         const foundUser = Other.findOne({ "email": req.body.email }).then((Email) => {
             if (Email !== null) {
                 var Othercondition = { email: req.body.email },
-                    OtherUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date } },
+                    OtherUpdate = { $push: { comp: req.body.comp, suggetion: req.body.suggetion, date: req.body.date, status: "pending" } },
                     Otheroption = { multi: true };
 
 
@@ -278,7 +275,7 @@ exports.getDetailsForChart = async(req,res) => {
     var hostelArray = await Hostel.findOne({ "email": req.query.Email }).then(function(done) {
 
         try {
-            return done.comp;
+            return done;
         } catch (error) {
             return 0;
         }
@@ -288,7 +285,7 @@ exports.getDetailsForChart = async(req,res) => {
     var academicArray = await Academic.findOne({ "email": req.query.Email }).then((done) => {
 
         try {
-            return done.comp;
+            return done;
         } catch (error) {
             return 0;
         }
@@ -297,7 +294,7 @@ exports.getDetailsForChart = async(req,res) => {
 
     var raggingArray = await Ragging.findOne({ "email": req.query.Email }).then((done) => {
         try {
-            return done.comp;
+            return done;
         } catch (error) {
             return 0;
         }
@@ -306,7 +303,7 @@ exports.getDetailsForChart = async(req,res) => {
 
     var transportArray = await Transport.findOne({ "email": req.query.Email }).then((done) => {
         try {
-            return done.comp;
+            return done;
         } catch (error) {
             return 0;
         }
@@ -317,14 +314,12 @@ exports.getDetailsForChart = async(req,res) => {
     
     var otherArray = await Other.findOne({ "email": req.query.Email }).then((done) => {
         try {
-            return done.comp;
+            return done;
         } catch (error) {
             return 0;
         }
     })
     totalArray.push(otherArray);
-
-    totalArray = [...totalArray[0], ...totalArray[1], ...totalArray[2], ...totalArray[3], ...totalArray[4]]
 
     res.send(totalArray)
 }

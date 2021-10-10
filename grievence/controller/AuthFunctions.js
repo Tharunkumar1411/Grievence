@@ -1,4 +1,4 @@
-var { User, Hostel, Academic, Ragging, Transport, Other } = require('../ser/DB/Schema')
+var { User } = require('../ser/DB/Schema')
 var jwt = require("jsonwebtoken");
 var mongoose = require('mongoose');
 const { json } = require("body-parser");
@@ -35,14 +35,15 @@ exports.signIn = (async(req, res) => {
 
             let token = jwt.sign({ email: req.body.email }, process.env.TOKEN_SECRET, { expiresIn: '8760hr' });
 
-            User.findOne({"password": req.body.password}).then((done) => {
-                res.status(200).send({ sign: true, token: token });
-            }).catch(err => {
-                res.status(200).send({ sign: false, token: token });
-
-            })
+                console.log(req.body.password);
+                User.findOne({"password": req.body.password}).then((data) => {
+                    if(data !== null){
+                        res.status(200).send({auth: true, token: token});
+                    }else{
+                        res.status(404).send({auth: false});
+                    }
+                })
             
-
         } else {
             User.create({
 

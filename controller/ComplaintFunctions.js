@@ -16,7 +16,7 @@ exports.addComplaint = (req, res) => {
     if (req.body.radio === "Hostel") {
 
         const foundUser = Hostel.findOne({ "email": req.body.email }).then((Email) => {
-            console.log(Email)
+
             if (Email !== null) {
 
                 var conditions = { email: req.body.email },

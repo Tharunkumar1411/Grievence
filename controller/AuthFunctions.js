@@ -39,9 +39,12 @@ exports.signIn = (async(req, res) => {
 
                 console.log(req.body.password);
                 User.findOne({"password": req.body.password}).then((data) => {
+
                     if(data !== null){
+                        console.log("found");
                         res.status(200).send({auth: true, token: token});
                     }else{
+                        console.log("not found");
                         res.status(404).send({auth: false});
                     }
                 })

@@ -30,6 +30,10 @@ var hostelSchema = new mongoose.Schema({
         type: Array
     },
     date: { type: Array },
+    
+    status: {
+        type: String
+    }
 
 });
 var Hostel = mongoose.model("Hostel", hostelSchema);
@@ -47,7 +51,12 @@ var academicsSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
+    status: {
+        type: Array
+    }
 });
 var Academic = mongoose.model("Academic", academicsSchema);
 
@@ -66,7 +75,12 @@ var raggingSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
+    status: {
+        type: Array
+    }
 
 });
 var Ragging = mongoose.model("Ragging", raggingSchema);
@@ -84,7 +98,12 @@ var transportSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
+    status: {
+        type: Array
+    }
 
 });
 var Transport = mongoose.model("Transport", transportSchema);
@@ -103,7 +122,12 @@ var otherSchema = new mongoose.Schema({
     suggetion: {
         type: Array
     },
-    date: { type: Array },
+    date: { 
+        type: Array 
+    },
+    status: {
+        type: Array
+    }
 });
 var Other = mongoose.model("Other", otherSchema);
 

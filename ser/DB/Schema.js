@@ -33,6 +33,9 @@ var hostelSchema = new mongoose.Schema({
     
     status: {
         type: String
+    },
+    response: {
+        type: Array
     }
 
 });
@@ -55,6 +58,9 @@ var academicsSchema = new mongoose.Schema({
         type: Array 
     },
     status: {
+        type: Array
+    },
+    response: {
         type: Array
     }
 });
@@ -80,6 +86,9 @@ var raggingSchema = new mongoose.Schema({
     },
     status: {
         type: Array
+    },
+    response: {
+        type: Array
     }
 
 });
@@ -102,6 +111,9 @@ var transportSchema = new mongoose.Schema({
         type: Array 
     },
     status: {
+        type: Array
+    },
+    response: {
         type: Array
     }
 
@@ -126,6 +138,9 @@ var otherSchema = new mongoose.Schema({
         type: Array 
     },
     status: {
+        type: Array
+    },
+    response: {
         type: Array
     }
 });
